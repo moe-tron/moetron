@@ -60,16 +60,13 @@ This bot is not used for commercial purposes, and derivatives of this work shoul
 
 **Questions**
 
-Q) Why do you use a truncation-psi of 0.55
-A) Personal preference. Enough variation without the images being too messed up.
-
-Q) Why is there a lot of weird headwear / animal ears?
-A) No idea, my guess is that there's a large variance in headwear / ears in the anime art that the model was trained on so it's difficult for the model to correctly generate stuff like that. That and the messy half ear half bow stuff you see was presumably good enough to pass the discriminator. Anime-art style faces are generally the same though so the model does pretty well with the face itself.
-
 Q) I see a lot of errors / warnings on startup, does that matter?
+
 A) Probably not, tensorflow will probably give some deprecation warnings and on startup you may see some memory allocation warnings. You can ignore them. If the bot starts up you should be good to go, just give it a couple seconds.
 
+
 Q) Can I use this for stuff other than anime images?
+
 A) Sure, if you find a trained model that produces images that you want you can just replace the default network in the run_generator.py constructor and use that.
 
 **Acknowledgement:**
