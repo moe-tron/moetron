@@ -6,21 +6,25 @@ This is just a simple discord bot that interfaces with the StyleGAN2 generator t
 
 **gen / generate** 
 Generates an image from a given seed.
+
 ![Generate example](docs/gen_example.png)
 
 
 **rand / random** 
 Generates an image from a random seed.
+
 ![Random example](docs/rand_example.png)
 
 
 **trunc / truncate** 
 Generates an image from the given seed with the provided truncation-psi.
+
 ![Truncation example](docs/trunc_example.png)
 
 
 **mess / messy** 
 Generates an image from a random seed w/ truncation turned off.
+
 ![Random example](docs/mess_example.png)
 
 
