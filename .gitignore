@@ -1,0 +1,8 @@
+/.stylegan2-cache/
+__pycache__/
+test_nvcc.exe
+test_nvcc.exp
+test_nvcc.lib
+.vscode
+results/*.png
+*.pkl
