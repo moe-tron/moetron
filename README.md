@@ -47,6 +47,9 @@ The model I used can be obtained from:
 https://www.gwern.net/Faces#stylegan-2
 you can use whatever model you want obviously, but this bot was built around using this one. Hence the "moe" naming and such.
 
+After everything is setup run the bot using `python bot.py`
+
+
 All credits for the trained model goes to the original creator Aaron Gokaslan.
 
 Currently images are kept in the results dir, but not tracked in vcs so if you get a image you really like and you're running the bot yourself you can find the image in the directory. Obviously this is under the assumption that you're only running the bot on a few servers and it isn't being spammed too much.
