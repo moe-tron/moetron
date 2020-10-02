@@ -30,6 +30,7 @@ Generates an image from a random seed w/ truncation turned off.
 
 **opp / opposite**
 Generates an image from a given seed w/ truncation-psi flipped.
+
 ![Random example](docs/opp_example.png)
 
 ## Setup:
@@ -55,6 +56,7 @@ This bot is not used for commercial purposes, and derivatives of this work shoul
 ## Other:
 
 **Questions**
+
 Q) Why do you use a truncation-psi of 0.55
 A) Personal preference. Enough variation without the images being too messed up.
 
