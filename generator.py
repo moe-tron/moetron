@@ -90,7 +90,7 @@ class Generate(commands.Cog):
         elif isinstance(error, commands.BadArgument):
             await ctx.send("Enter a number for the seed and truncation")
         elif isinstance(error.original, ValueError):
-            await ctx.send("Enter a number between 0 and 2^32 -1 for the seed and -1 -> 1 for truncaiton value")
+            await ctx.send("Enter a number between 0 and 2^32 -1 for the seed and -1 -> 1 for truncation value")
         else:
             print(error)
             await ctx.send("Uh oh something bad happened and idk what it was")
