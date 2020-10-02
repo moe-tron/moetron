@@ -1,5 +1,6 @@
 /.stylegan2-cache/
 __pycache__/
+_cudacache/tflib/_cudacache/
 test_nvcc.exe
 test_nvcc.exp
 test_nvcc.lib
