@@ -72,7 +72,7 @@ A) Sure, if you find a trained model that produces images that you want you can 
 **Acknowledgement:**
 * Aaron Gokaslan for the pre-trained model
 * Gwern Branwen for all of their articles about StyleGAN.
-* The creators of StyleGAN2.
+* The creators of StyleGAN2, dnnlib is from there w/ all copyrights / attributions remaining.
 
 **Future work**
 * Possibly unit tests although there's not really much logic to test.
