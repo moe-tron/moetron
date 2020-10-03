@@ -46,21 +46,20 @@ https://github.com/NVlabs/stylegan2
 
 It's kind of a pain to set up everything... Honestly I'd just try to get StyleGAN2 running first on your machine, then you'll know that this will work. After you get it working, you should just need discord py and to set up your bot w/ discord to get your key.
 
-See the license under docs, it's the same as the stylegan2 license.
-https://nvlabs.github.io/stylegan2/license.html
+After everything is setup run the bot using `python bot.py`
 
 The model I used can be obtained from:
 https://www.gwern.net/Faces#stylegan-2
 you can use whatever model you want obviously, but this bot was built around using this one. Hence the "moe" naming and such.
-
-After everything is setup run the bot using `python bot.py`
-
 
 All credits for the trained model goes to the original creator Aaron Gokaslan.
 
 Currently images are kept in the results dir, but not tracked in vcs so if you get a image you really like and you're running the bot yourself you can find the image in the directory. Obviously this is under the assumption that you're only running the bot on a few servers and it isn't being spammed too much.
 
 This bot is not used for commercial purposes, and derivatives of this work should not be used for commercial purposes. See the license for more information.
+
+See the license under docs, it's the same as the stylegan2 license.
+https://nvlabs.github.io/stylegan2/license.html
 
 ## Other:
 

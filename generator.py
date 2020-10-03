@@ -97,8 +97,9 @@ class Generate(commands.Cog):
 
     #----------------------------------------------------------------------------
 
-    @commands.command(help="Generates an image from a seed based on a string. Params: string")
-    async def name(self, ctx, input_string:str):
+    @commands.command(help="Generates an image from a seed based on a string. Params: string(s)")
+    async def name(self, ctx, *args):
+        input_string = ' '.join(args)
         seed = hash(input_string) % 10000000
         img_path = self.generator.generate_one_image(seed)
         await ctx.send('Here is your generated anime girl from name %s :)' % input_string, file=discord.File(img_path, 'moe.png'))
