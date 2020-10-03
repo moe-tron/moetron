@@ -52,7 +52,7 @@ class Generate(commands.Cog):
 
     @commands.command(help="Generates an image from a random seed. Params: None", aliases=["random"])
     async def rand(self, ctx):
-        seed = random.randint(0,1000000)
+        seed = random.randint(0,10000000)
         img_path = self.generator.generate_one_image(seed)
         await ctx.send('Here is your randomly generated anime girl :) seed: %.4d' % seed, file=discord.File(img_path, 'moe.png'))
 
@@ -65,7 +65,7 @@ class Generate(commands.Cog):
 
     @commands.command(help="Generates an image from a random seed with truncation turned off. Params: None", aliases=["messy"])
     async def mess(self, ctx):
-        seed = random.randint(0,1000000)
+        seed = random.randint(0,10000000)
         img_path = self.generator.generate_one_image(seed, 1)
         await ctx.send('Here is your randomly generated anime girl seed: %.4d :)\nShe may look kind of messed up' % seed, file=discord.File(img_path, 'moe.png'))
 
@@ -96,3 +96,19 @@ class Generate(commands.Cog):
             await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
+
+    @commands.command(help="Generates an image from a seed based on a string. Params: string")
+    async def name(self, ctx, input_string:str):
+        seed = hash(input_string) % 10000000
+        img_path = self.generator.generate_one_image(seed)
+        await ctx.send('Here is your generated anime girl from name %s :)' % input_string, file=discord.File(img_path, 'moe.png'))
+
+    @name.error
+    async def name_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("No name provided")
+        elif isinstance(error, commands.BadArgument):
+            await ctx.send("Enter a string for the name")
+        else:
+            print(error, type(error))
+            await ctx.send("Uh oh something bad happened and idk what it was")

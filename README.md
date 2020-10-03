@@ -33,6 +33,12 @@ Generates an image from a given seed w/ truncation-psi flipped.
 
 ![Random example](docs/opp_example.png)
 
+
+**gen / generate** 
+Generates an image based on the hash of a string.
+
+![Generate example](docs/name_example.png)
+
 ## Setup:
 
 To get this working follow the steps on the official StyleGAN2 repo:
