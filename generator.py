@@ -102,7 +102,7 @@ class Generate(commands.Cog):
         input_string = ' '.join(args)
         seed = hash(input_string) % 10000000
         img_path = self.generator.generate_one_image(seed)
-        await ctx.send('Here is your generated anime girl from name %s :)' % input_string, file=discord.File(img_path, 'moe.png'))
+        await ctx.send('Here is your generated anime girl from name %s and seed %.4d' % (input_string, seed), file=discord.File(img_path, 'moe.png'))
 
     @name.error
     async def name_error(self, ctx, error):
