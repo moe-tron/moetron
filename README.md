@@ -61,6 +61,8 @@ This bot is not used for commercial purposes, and derivatives of this work shoul
 See the license under docs, it's the same as the stylegan2 license.
 https://nvlabs.github.io/stylegan2/license.html
 
+If you use this code in your bot or anything include the license and I'd appreciate it if you'd credit me as well as the creator of the network if you choose to use it :)
+
 ## Other:
 
 **Questions**
