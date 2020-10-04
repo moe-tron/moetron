@@ -27,7 +27,7 @@ class Generate(commands.Cog):
         elif isinstance(error.original, ValueError):
             await ctx.send("Enter a number between 0 and 2^32 -1")
         else:
-            print(error, type(error))
+            print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class Generate(commands.Cog):
         elif isinstance(error.original, ValueError):
             await ctx.send("Enter a number between 0 and 2^32 -1")
         else:
-            print(error)
+            print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
@@ -59,7 +59,7 @@ class Generate(commands.Cog):
 
     @rand.error
     async def rand_error(self, ctx, error):
-        print(error)
+        print(error, error.original)
         await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
@@ -72,7 +72,7 @@ class Generate(commands.Cog):
 
     @mess.error
     async def mess_error(self, ctx, error):
-        print(error)
+        print(error, error.original)
         await ctx.send("Uh oh something bad happened and idk what it was")
     
     #----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ class Generate(commands.Cog):
         elif isinstance(error.original, ValueError):
             await ctx.send("Enter a number between 0 and 2^32 -1 for the seed and -1 -> 1 for truncation value")
         else:
-            print(error)
+            print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
@@ -111,5 +111,5 @@ class Generate(commands.Cog):
         elif isinstance(error, commands.BadArgument):
             await ctx.send("Enter a string for the name")
         else:
-            print(error, type(error))
+            print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
