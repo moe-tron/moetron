@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from run_generator import Generator
 import random
+import hashlib
 
 # Generator cog, has 4 commands
 class Generate(commands.Cog):
@@ -98,9 +99,8 @@ class Generate(commands.Cog):
     #----------------------------------------------------------------------------
 
     @commands.command(help="Generates an image from a seed based on a string. Params: string(s)")
-    async def name(self, ctx, *, args):
-        input_string = args
-        seed = abs(hash(input_string)) % 1000000000
+    async def name(self, ctx, *, input_string):
+        seed = int.from_bytes(hashlib.md5(input_string.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
         img_path = self.generator.generate_one_image(seed)
         await ctx.send('Here is your generated anime girl from name %s and seed %.4d' % (input_string, seed), file=discord.File(img_path, 'moe.png'))
 

@@ -11,6 +11,9 @@ bot = commands.Bot(command_prefix='moe')
 async def on_ready():
     print('Logged in as {}:{}'.format(bot.user.name, bot.user.id))
     print('------')
+    print('Servers connected to:')
+    for guild in bot.guilds:
+        print(guild.name)
     status = discord.Game("Generating Anime!")
     await bot.change_presence(status=discord.Status.online, activity=status)
 
