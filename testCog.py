@@ -53,12 +53,8 @@ class TestGeneratorCog(unittest.TestCase):
 
     @async_test
     def testTruncShouldRaseValueErrorWhenTruncationOutOfRange(self):
-        try: # doing this because im too lazy to get assertraises w/ async
+        with self.assertRaises(ValueError):
             yield from self.genCog.trunc(self.genCog, self.ctx, 123, 12)
-        except:
-            pass
-        self.assertTrue(self.ctx.file == None)
-
     
     @async_test
     def testTruncShouldReturnValidFileForCorrectArgs(self):
