@@ -1,14 +1,13 @@
 import discord
 from discord.ext import commands
-from run_generator import Generator
 import random
 import hashlib
 
 # Generator cog, has 4 commands
 class Generate(commands.Cog):
 
-    def __init__(self):
-        self.generator = Generator()
+    def __init__(self, generator):
+        self.generator = generator
         self.generator.generate_one_image(1)
 
     #----------------------------------------------------------------------------
