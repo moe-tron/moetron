@@ -86,4 +86,4 @@ A) Sure, if you find a trained model that produces images that you want you can 
 * Implement some kind of style mixing letting you mix seed A's style with seed B.
 
 **Contribution**
-Feel free to make a PR. I'll probably eventually get around to reviewing it. There's not any tests currently so please make sure your code is working before you make the PR.
+Feel free to make a PR. I'll probably eventually get around to reviewing it. There's simple unit tests, run them before making a PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I use to do full e2e testing before I commit changes.
