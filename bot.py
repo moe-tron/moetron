@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from generator import Generate
-
+from run_generator import Generator
 # Super simple discord bot that uses StyleGAN2 to create pics and send them.
 # See generator.py for the commands 
 
@@ -17,5 +17,5 @@ async def on_ready():
     status = discord.Game("Generating Anime!")
     await bot.change_presence(status=discord.Status.online, activity=status)
 
-bot.add_cog(Generate())
+bot.add_cog(Generate(Generator()))
 bot.run('key')
