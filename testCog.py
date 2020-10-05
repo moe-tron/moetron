@@ -76,6 +76,11 @@ class TestGeneratorCog(unittest.TestCase):
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
+    def testMessShouldReturnValidFile(self):
+        yield from self.genCog.mess(self.genCog, self.ctx)
+        self.assertFalse(self.ctx.file.fp.name == self.imagePath)
+    
+    @async_test
     def testNameShouldReturnValidFile(self):
         yield from self.genCog.name(self.genCog, self.ctx, input_string = "hello")
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
