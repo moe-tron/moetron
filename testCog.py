@@ -26,6 +26,9 @@ class MockGenerator():
 
     def generate_one_image(self, seed, truncation = 0.55):
         return self.imagePath
+    
+    def style_mix(self, seed1, seed2, truncation = 0.55):
+        return self.imagePath
 
 def async_test(f):
     def wrapper(*args, **kwargs):
@@ -74,6 +77,21 @@ class TestGeneratorCog(unittest.TestCase):
     @async_test
     def testNameShouldReturnValidFile(self):
         yield from self.genCog.name(self.genCog, self.ctx, input_string = "hello")
+        self.assertTrue(self.ctx.file.fp.name == self.imagePath)
+
+    @async_test
+    def testMixShouldThrowForMissingArg(self):
+        with self.assertRaises(TypeError):
+            yield from self.genCog.mix(self.genCog, self.ctx, 123)
+    
+    @async_test
+    def testMixShouldReturnValidImg(self):
+        yield from self.genCog.mix(self.genCog, self.ctx, '123', '1234')
+        self.assertTrue(self.ctx.file.fp.name == self.imagePath)
+    
+    @async_test
+    def testMixShouldReturnValidImgForStringArgs(self):
+        yield from self.genCog.mix(self.genCog, self.ctx, "string1", "string2")
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
 
 if __name__ == '__main__':

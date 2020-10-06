@@ -9,6 +9,7 @@ class Generate(commands.Cog):
     def __init__(self, generator):
         self.generator = generator
         self.generator.generate_one_image(1)
+        self.generator.style_mix(100, 200)
 
     #----------------------------------------------------------------------------
 
@@ -109,6 +110,30 @@ class Generate(commands.Cog):
             await ctx.send("No name provided")
         elif isinstance(error, commands.BadArgument):
             await ctx.send("Enter a string for the name")
+        else:
+            print(error, error.original)
+            await ctx.send("Uh oh something bad happened and idk what it was")
+
+    @commands.command(help="Applies the second seed's styling onto the first image. Params: seed, seed")
+    async def mix(self, ctx, arg1:str, arg2:str):
+        img_path = None
+        if arg1.isdigit() and arg2.isdigit():
+            img_path = self.generator.style_mix(int(arg1), int(arg2))
+        else:
+            seed1 = int.from_bytes(hashlib.md5(arg1.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
+            seed2 = int.from_bytes(hashlib.md5(arg2.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
+            img_path = self.generator.style_mix(seed1, seed2)
+        
+        await ctx.send('Here is your generated anime girl from %s and %s :)' % (arg1, arg2), file=discord.File(img_path, 'moe.png'))
+
+    @mix.error
+    async def mix_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("No seed(s) provided")
+        elif isinstance(error, commands.BadArgument):
+            await ctx.send("Enter a number for the seed")
+        elif isinstance(error.original, ValueError):
+            await ctx.send("Enter a number between 0 and 2^32 -1")
         else:
             print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")

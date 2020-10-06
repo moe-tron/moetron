@@ -34,10 +34,15 @@ Generates an image from a given seed w/ truncation-psi flipped.
 ![Random example](docs/opp_example.png)
 
 
-**gen / generate** 
+**name** 
 Generates an image based on the hash of a string.
 
 ![Generate example](docs/name_example.png)
+
+**mix** 
+Mixes the style of either 2 seeds or 2 strings
+
+![Mix example](docs/mix_example.png)
 
 ## Setup:
 
@@ -82,7 +87,6 @@ A) Sure, if you find a trained model that produces images that you want you can 
 * The creators of StyleGAN2, dnnlib is from there w/ all copyrights / attributions remaining.
 
 **Future work**
-* Possibly unit tests although there's not really much logic to test.
 * Implement some kind of style mixing letting you mix seed A's style with seed B.
 
 **Contribution**
