@@ -87,7 +87,7 @@ A) Sure, if you find a trained model that produces images that you want you can 
 * The creators of StyleGAN2, dnnlib is from there w/ all copyrights / attributions remaining.
 
 **Future work**
-* Implement some kind of style mixing letting you mix seed A's style with seed B.
+* Not sure what else to add atm
 
 **Contribution**
 Feel free to make a PR. I'll probably eventually get around to reviewing it. There's simple unit tests, run them before making a PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I use to do full e2e testing before I commit changes.

@@ -3,7 +3,10 @@ from discord.ext import commands
 import random
 import hashlib
 
-# Generator cog, has 4 commands
+"""
+ * Generate cog
+ * Has commands: gen, rand, name, mess, trunc, mix
+"""
 class Generate(commands.Cog):
 
     def __init__(self, generator):
@@ -114,6 +117,8 @@ class Generate(commands.Cog):
             print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
 
+    #----------------------------------------------------------------------------
+
     @commands.command(help="Applies the second seed's styling onto the first image. Params: seed, seed")
     async def mix(self, ctx, arg1:str, arg2:str):
         img_path = None
@@ -137,3 +142,5 @@ class Generate(commands.Cog):
         else:
             print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
+
+    #----------------------------------------------------------------------------
