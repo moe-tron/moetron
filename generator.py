@@ -56,9 +56,10 @@ class Generate(commands.Cog):
 
     @commands.command(help="Generates an image from a random seed. Params: None", aliases=["random"])
     async def rand(self, ctx):
-        seed = random.randint(0, 4294967295)
-        img_path = self.generator.generate_one_image(seed)
-        await ctx.send('Here is your randomly generated anime girl :) seed: %.4d' % seed, file=discord.File(img_path, 'moe.png'))
+        trunc = round(random.uniform(0.5, 1),3)
+        seed = random.randint(0, 4294967295,)
+        img_path = self.generator.generate_one_image(seed, trunc)
+        await ctx.send('Here is your randomly generated anime girl :) seed: %s truncation: %.3f' % (seed, trunc), file=discord.File(img_path, 'moe.png'))
 
     @rand.error
     async def rand_error(self, ctx, error):
@@ -71,7 +72,7 @@ class Generate(commands.Cog):
     async def mess(self, ctx):
         seed = random.randint(0, 4294967295)
         img_path = self.generator.generate_one_image(seed, 1)
-        await ctx.send('Here is your randomly generated anime girl seed: %.4d :)\nShe may look kind of messed up' % seed, file=discord.File(img_path, 'moe.png'))
+        await ctx.send('Here is your randomly generated anime girl seed: %s :)\nShe may look kind of messed up' % seed, file=discord.File(img_path, 'moe.png'))
 
     @mess.error
     async def mess_error(self, ctx, error):
@@ -103,9 +104,9 @@ class Generate(commands.Cog):
 
     @commands.command(help="Generates an image from a seed based on a string. Params: string(s)")
     async def name(self, ctx, *, input_string):
-        seed = int.from_bytes(hashlib.md5(input_string.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
+        seed = self.convertToSeed(input_string)
         img_path = self.generator.generate_one_image(seed)
-        await ctx.send('Here is your generated anime girl from name %s and seed %.4d' % (input_string, seed), file=discord.File(img_path, 'moe.png'))
+        await ctx.send('Here is your generated anime girl from name %s seed: %s' % (input_string, seed), file=discord.File(img_path, 'moe.png'))
 
     @name.error
     async def name_error(self, ctx, error):
@@ -121,26 +122,20 @@ class Generate(commands.Cog):
 
     @commands.command(help="Applies the second seed's styling onto the first image. Params: seed, seed")
     async def mix(self, ctx, arg1:str, arg2:str):
-        img_path = None
-        if arg1.isdigit() and arg2.isdigit():
-            img_path = self.generator.style_mix(int(arg1), int(arg2))
-        else:
-            seed1 = int.from_bytes(hashlib.md5(arg1.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
-            seed2 = int.from_bytes(hashlib.md5(arg2.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000
-            img_path = self.generator.style_mix(seed1, seed2)
-        
+        img_path = self.generator.style_mix(self.convertToSeed(arg1), self.convertToSeed(arg2))
         await ctx.send('Here is your generated anime girl from %s and %s :)' % (arg1, arg2), file=discord.File(img_path, 'moe.png'))
 
     @mix.error
     async def mix_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("No seed(s) provided")
-        elif isinstance(error, commands.BadArgument):
-            await ctx.send("Enter a number for the seed")
-        elif isinstance(error.original, ValueError):
-            await ctx.send("Enter a number between 0 and 2^32 -1")
+            await ctx.send("Not enough inputs provided")
         else:
             print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")
 
     #----------------------------------------------------------------------------
+
+    ## Helper Methods
+
+    def convertToSeed(self, arg:str):
+        return int.from_bytes(hashlib.md5(arg.encode('utf-8')).digest(), byteorder='big', signed=False) % 1000000000 if not arg.isdigit() else int(arg)
