@@ -44,6 +44,9 @@ Mixes the style of either 2 seeds or 2 strings
 
 ![Mix example](docs/mix_example.png)
 
+## Whitelisting Feature
+This bot uses a whitelisting feature to automatically leave guilds that aren't whitelisted. If you don't want this feature enabled you can just not create a whitelist.csv file, it won't remove servers if the file does not exist. Otherwise create a file whitelist.csv with the guild ids separated by ,
+
 ## Setup:
 
 To get this working follow the steps on the official StyleGAN2 repo:
