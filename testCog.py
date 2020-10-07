@@ -1,6 +1,8 @@
 from generator import Generate
 import unittest
 import asyncio
+import shutil
+import os
 
 # pylint: disable=too-many-function-args
 
@@ -49,50 +51,58 @@ class TestGeneratorCog(unittest.TestCase):
         self.ctx = MockCtx()
 
     @async_test
-    def testgenShouldReturnImageForCorrectArgs(self):
+    async def testgenShouldReturnImageForCorrectArgs(self):
         # not sure why, but I'm forced to pass the object itself into gen here. Idk why I have to do it
-        yield from self.genCog.gen(self.genCog, self.ctx, 123)
+        await self.genCog.gen(self.genCog, self.ctx, 123)
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
 
     @async_test
-    def testTruncShouldRaseValueErrorWhenTruncationOutOfRange(self):
+    async def testTruncShouldRaseValueErrorWhenTruncationOutOfRange(self):
         with self.assertRaises(ValueError):
-            yield from self.genCog.trunc(self.genCog, self.ctx, 123, 12)
+            await self.genCog.trunc(self.genCog, self.ctx, 123, 12)
     
     @async_test
-    def testTruncShouldReturnValidFileForCorrectArgs(self):
-        yield from self.genCog.trunc(self.genCog, self.ctx, 123, 1)
+    async def testTruncShouldReturnValidFileForCorrectArgs(self):
+        await self.genCog.trunc(self.genCog, self.ctx, 123, 1)
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
 
     @async_test
-    def testRandShouldReturnValidFile(self):
-        yield from self.genCog.rand(self.genCog, self.ctx)
+    async def testRandShouldReturnValidFile(self):
+        await self.genCog.rand(self.genCog, self.ctx)
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
-    def testMessShouldReturnValidFile(self):
-        yield from self.genCog.mess(self.genCog, self.ctx)
+    async def testMessShouldReturnValidFile(self):
+        await self.genCog.mess(self.genCog, self.ctx)
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
-    def testNameShouldReturnValidFile(self):
-        yield from self.genCog.name(self.genCog, self.ctx, input_string = "hello")
+    async def testNameShouldReturnValidFile(self):
+        await self.genCog.name(self.genCog, self.ctx, input_string = "hello")
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
 
     @async_test
-    def testMixShouldThrowForMissingArg(self):
+    async def testMixShouldThrowForMissingArg(self):
         with self.assertRaises(TypeError):
-            yield from self.genCog.mix(self.genCog, self.ctx, 123)
+            await self.genCog.mix(self.genCog, self.ctx, 123)
     
     @async_test
-    def testMixShouldReturnValidImg(self):
-        yield from self.genCog.mix(self.genCog, self.ctx, '123', '1234')
+    async def testMixShouldReturnValidImg(self):
+        await self.genCog.mix(self.genCog, self.ctx, '123', '1234')
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
-    def testMixShouldReturnValidImgForStringArgs(self):
-        yield from self.genCog.mix(self.genCog, self.ctx, "string1", "string2")
+    async def testMixShouldReturnValidImgForStringArgs(self):
+        await self.genCog.mix(self.genCog, self.ctx, "string1", "string2")
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
+    
+    @async_test
+    async def testWhenDeleteIsEnabledImageShouldBeRemoved(self):
+        shutil.copyfile("docs/gen_example.png", "results/image_to_be_deleted.png")
+        self.imagePath = "results/image_to_be_deleted.png"
+        self.genCog = Generate(MockGenerator(self.imagePath), True)
+        await self.genCog.gen(self.genCog, self.ctx, 123)
+        self.assertFalse(os.path.isfile(self.imagePath))
 
 if __name__ == '__main__':
     unittest.main()

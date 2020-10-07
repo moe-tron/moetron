@@ -44,9 +44,6 @@ Mixes the style of either 2 seeds or 2 strings
 
 ![Mix example](docs/mix_example.png)
 
-## Whitelisting Feature:
-This bot uses a whitelisting feature to automatically leave guilds that aren't whitelisted. If you don't want this feature enabled you can just not create a whitelist.csv file, it won't remove servers if the file does not exist. Otherwise create a file whitelist.csv with the guild ids separated by ,
-
 ## Setup:
 
 To get this working follow the steps on the official StyleGAN2 repo:
@@ -54,15 +51,25 @@ https://github.com/NVlabs/stylegan2
 
 It's kind of a pain to set up everything... Honestly I'd just try to get StyleGAN2 running first on your machine, then you'll know that this will work. After you get it working, you should just need discord py and to set up your bot w/ discord to get your key.
 
+Off the top of my head the requirements are:
+* Python 3.7 (3.8 or newer won't work)
+* Tensorflow-gpu 1.14
+* CUDA 10.0
+* cuDNN 7.5 or newer
+* Visual Studio 2017 w/ MSVC
+* Discord py
+* Pillow
+* numpy
+
+You can test CUDA by running test_nvcc.cu
+
 After everything is setup run the bot using `python bot.py`
 
 The model I used can be obtained from:
 https://www.gwern.net/Faces#stylegan-2
-you can use whatever model you want obviously, but this bot was built around using this one. Hence the "moe" naming and such.
+you can use whatever model you want, but this bot was built around using this one. Hence the "moe" naming and such.
 
 All credits for the trained model goes to the original creator Aaron Gokaslan.
-
-Currently images are kept in the results dir, but not tracked in vcs so if you get a image you really like and you're running the bot yourself you can find the image in the directory. Obviously this is under the assumption that you're only running the bot on a few servers and it isn't being spammed too much.
 
 This bot is not used for commercial purposes, and derivatives of this work should not be used for commercial purposes. See the license for more information.
 
@@ -70,6 +77,17 @@ See the license under docs, it's the same as the stylegan2 license.
 https://nvlabs.github.io/stylegan2/license.html
 
 If you use this code in your bot or anything include the license and I'd appreciate it if you'd credit me as well as the creator of the network if you choose to use it :)
+
+## Options: 
+
+**Image Deletion:**
+You can choose to have images be deleted after creation. By default this is disabled and images are kept in the results directory. To enable image deletion you can just pass in True as the second arg for cog.
+
+**Whitelisting Feature:**
+This bot uses a whitelisting feature to automatically leave guilds that aren't whitelisted. If you don't want this feature enabled you can just not create a whitelist.csv file, it won't remove servers if the file does not exist. Otherwise create a file whitelist.csv with the guild ids separated by ,
+
+**Model / Network changing:**
+To change the model that the bot uses simply pass in the path to the network when creating the Generator.
 
 ## Other:
 
@@ -80,9 +98,9 @@ Q) I see a lot of errors / warnings on startup, does that matter?
 A) Probably not, tensorflow will probably give some deprecation warnings and on startup you may see some memory allocation warnings. You can ignore them. If the bot starts up you should be good to go, just give it a couple seconds.
 
 
-Q) Can I use this for stuff other than anime images?
+Q) Can I add this bot to my server? 
 
-A) Sure, if you find a trained model that produces images that you want you can just replace the default network in the run_generator.py constructor and use that.
+A) Moetron is public, but I currently only use it on a few servers that I have whitelisted. I don't currently planning on adding additional servers unless I personally know someone in the server. You're free to use this code to host your own bot though.
 
 **Acknowledgement:**
 * Aaron Gokaslan for the pre-trained model

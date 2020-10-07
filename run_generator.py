@@ -11,6 +11,11 @@ import dnnlib.tflib as tflib
 import pickle
 
 # Obviously changed from the old run_generator.py in stylegan2, but I kept the copyright because a lot of logic/code was re-used here.
+
+"""
+ * Generator that interfaces with the provided network to generate images
+ * Not making this async because it's computation heavy so there's not much to be gained.
+"""
 class Generator:
     def __init__(self, networkpath="pretrained/2020-01-11-skylion-stylegan2-animeportraits-networksnapshot-024664.pkl"):
         self._cached_networks = dict()

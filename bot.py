@@ -4,47 +4,55 @@ from generator import Generate
 from run_generator import Generator
 import os
 import csv
-# Super simple discord bot that uses StyleGAN2 to create pics and send them.
+
+# Discord bot that uses StyleGAN2 to create pics and send them.
 # See generator.py for the commands 
 
-bot = commands.Bot(command_prefix='moe')
-global whitelist
+class Moetron(commands.Bot):
 
-# whilelist csv has guild ids separated by comma. If no file exists we ignore the whitelist feature.
-def load_whitelist(whitelist_file):
-    if os.path.isfile(whitelist_file):
-        with open(whitelist_file,'r')as f:
-            raw_data = f.read().strip("\n")
-            return list(map(int, raw_data.split(",")))
-    return []
+    def __init__(self, prefix, **options):
+        super().__init__(prefix, **options)
+        self.add_cog(Generate(Generator(), delete_images=False))
+        self.whitelist = self.load_whitelist('whitelist.csv')
+        print("Whitelisted ids: ", self.whitelist)
 
 
-async def verify_servers(guilds):
-    global whitelist
-    for guild in bot.guilds:
-        if whitelist and guild.id not in whitelist:
+    # whilelist csv has guild ids separated by comma. If no file exists we ignore the whitelist feature.
+    def load_whitelist(self, whitelist_file):
+        if os.path.isfile(whitelist_file):
+            with open(whitelist_file,'r')as f:
+                raw_data = f.read().strip("\n")
+                return list(map(int, raw_data.split(",")))
+        return []
+
+
+    async def verify_servers(self, guilds):
+        for guild in self.guilds:
+            if self.whitelist and guild.id not in self.whitelist:
+                print("Leaving guild ID: %s, not whitelisted" % guild.id)
+                await guild.leave()
+
+    async def on_guild_join(self, guild):
+        if self.whitelist and guild.id not in self.whitelist:
             print("Leaving guild ID: %s, not whitelisted" % guild.id)
             await guild.leave()
 
-@bot.event
-async def on_guild_join(guild):
-    global whitelist
-    if whitelist and guild.id not in whitelist:
-        print("Leaving guild ID: %s, not whitelisted" % guild.id)
-        await guild.leave()
+    async def on_ready(self):
+        print('Logged in as {}:{}'.format(self.user.name, self.user.id))
+        print('------')
+        print('Servers connected to:')
+        for guild in self.guilds:
+            print(guild.name)
+        await self.verify_servers(self.guilds)
+        status = discord.Game("Generating Anime!")
+        await self.change_presence(status=discord.Status.online, activity=status)
 
-@bot.event
-async def on_ready():
-    print('Logged in as {}:{}'.format(bot.user.name, bot.user.id))
-    print('------')
-    print('Servers connected to:')
-    for guild in bot.guilds:
-        print(guild.name)
-    await verify_servers(bot.guilds)
-    status = discord.Game("Generating Anime!")
-    await bot.change_presence(status=discord.Status.online, activity=status)
 
-whitelist = load_whitelist('whitelist.csv')
-print("Whitelisted ids: ", whitelist)
-bot.add_cog(Generate(Generator()))
-bot.run(os.environ.get('MOEKEY'))
+
+def runBot():
+    moetron = Moetron(prefix='moe')
+    moetron.run(os.environ.get('MOEKEY'))
+
+
+if __name__ == '__main__':
+    runBot()
