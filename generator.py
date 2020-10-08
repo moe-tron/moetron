@@ -128,8 +128,10 @@ class Generate(commands.Cog):
 
     #----------------------------------------------------------------------------
 
-    @commands.command(help="Applies the second seed's styling onto the first image. Params: seed, seed")
-    async def mix(self, ctx, arg1:str, arg2:str):
+    @commands.command(help="Applies the style a of input A onto input B, split with | if they're more than 1 word\nExamples:\nmoemix moetron moe\nmoemix moetron is awesome! | I love moetron!\nmoemix 100 500")
+    async def mix(self, ctx, *, args):
+        split_args = args.split(" | ") if " | " in args else args.split()
+        arg1, arg2 = split_args[0], split_args[1] # This will throw for 1 arg that's fine
         img_path = self.generator.style_mix(self.convertToSeed(arg1), self.convertToSeed(arg2))
         await ctx.send('Here is your generated anime girl from %s and %s :)' % (arg1, arg2), file=discord.File(img_path, 'moe.png'))
         await self.cleanup(img_path)
@@ -137,6 +139,8 @@ class Generate(commands.Cog):
     @mix.error
     async def mix_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("Not enough inputs provided")
+        elif isinstance(error.original, IndexError):
             await ctx.send("Not enough inputs provided")
         else:
             print(error, error.original)

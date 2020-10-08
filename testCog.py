@@ -83,17 +83,17 @@ class TestGeneratorCog(unittest.TestCase):
 
     @async_test
     async def testMixShouldThrowForMissingArg(self):
-        with self.assertRaises(TypeError):
-            await self.genCog.mix(self.genCog, self.ctx, 123)
+        with self.assertRaises(IndexError):
+            await self.genCog.mix(self.genCog, self.ctx, args='123')
     
     @async_test
     async def testMixShouldReturnValidImg(self):
-        await self.genCog.mix(self.genCog, self.ctx, '123', '1234')
+        await self.genCog.mix(self.genCog, self.ctx, args='123 1234')
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
     async def testMixShouldReturnValidImgForStringArgs(self):
-        await self.genCog.mix(self.genCog, self.ctx, "string1", "string2")
+        await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf")
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
