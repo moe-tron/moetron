@@ -128,11 +128,15 @@ class Generate(commands.Cog):
 
     #----------------------------------------------------------------------------
 
-    @commands.command(help="Applies the style a of input A onto input B, split with | if they're more than 1 word\nExamples:\nmoemix moetron moe\nmoemix moetron is awesome! | I love moetron!\nmoemix 100 500")
+    @commands.command(help="Applies the style a of input A onto input B, split with | if they're more than 1 word use -t to set the truncation. -t must come after all inputs and separated by whitespace.\nExamples:\nmoemix moetron moe\nmoemix moetron is awesome! | I love moetron!\nmoemix 100 500\nmoemix moetron is awesome! | I love moetron! -t 0.9")
     async def mix(self, ctx, *, args):
+        trunc = 0.55
+        if " -t " in args:
+            args, temp_trunc = args.split(" -t ")
+            trunc = float(temp_trunc)
         split_args = args.split(" | ") if " | " in args else args.split()
         arg1, arg2 = split_args[0], split_args[1] # This will throw for 1 arg that's fine
-        img_path = self.generator.style_mix(self.convertToSeed(arg1), self.convertToSeed(arg2))
+        img_path = self.generator.style_mix(self.convertToSeed(arg1), self.convertToSeed(arg2), truncation_psi=trunc)
         await ctx.send('Here is your generated anime girl from %s and %s :)' % (arg1, arg2), file=discord.File(img_path, 'moe.png'))
         await self.cleanup(img_path)
 

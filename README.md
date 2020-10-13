@@ -40,8 +40,12 @@ Generates an image based on the hash of a string.
 ![Generate example](docs/name_example.png)
 
 **mix** 
-Mixes the style of either 2 seeds or 2 strings
-
+Mixes the style of either 2 seeds or 2 strings. For multi word args split them using " | "
+Examples:
+moemix Moetron is awesome! | We love moetron!
+moemix 123 500
+moemix me you
+moemix Moetron is awesome! | We love moetron! -t 0.9
 ![Mix example](docs/mix_example.png)
 
 ## Setup:
@@ -63,7 +67,9 @@ Off the top of my head the requirements are:
 
 You can test CUDA by running test_nvcc.cu
 
-After everything is setup run the bot using `python bot.py`
+Currently the bot's key is set to be read from an env var. You can just hardcode it though if you want.
+
+After everything is setup run the bot using `python bot.py` It'll take a few seconds to start up because it starts up tensorflow and generates a couple images before the bot starts.
 
 The model I used can be obtained from:
 https://www.gwern.net/Faces#stylegan-2
@@ -75,8 +81,6 @@ This bot is not used for commercial purposes, and derivatives of this work shoul
 
 See the license under docs, it's the same as the stylegan2 license.
 https://nvlabs.github.io/stylegan2/license.html
-
-If you use this code in your bot or anything include the license and I'd appreciate it if you'd credit me as well as the creator of the network if you choose to use it :)
 
 ## Options: 
 
@@ -100,7 +104,7 @@ A) Probably not, tensorflow will probably give some deprecation warnings and on 
 
 Q) Can I add this bot to my server? 
 
-A) Moetron is public, but I currently only use it on a few servers that I have whitelisted. I don't currently planning on adding additional servers unless I personally know someone in the server. You're free to use this code to host your own bot though.
+A) Moetron is public, but I currently only use it on a few servers that I have whitelisted. I don't currently planning on adding additional servers unless I personally know someone in the server. The reasoning behind this is that he bot's workload is pretty compute heavy and I don't want tons of people spamming it at once. You're free to use this code to host your own bot though.
 
 **Acknowledgement:**
 * Aaron Gokaslan for the pre-trained model
@@ -108,7 +112,7 @@ A) Moetron is public, but I currently only use it on a few servers that I have w
 * The creators of StyleGAN2, dnnlib is from there w/ all copyrights / attributions remaining.
 
 **Future work**
-* Not sure what else to add atm
+* Not sure what else to add atm, I'm pretty happy with the state of this bot.
 
 **Contribution**
-Feel free to make a PR. I'll probably eventually get around to reviewing it. There's simple unit tests, run them before making a PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I use to do full e2e testing before I commit changes.
+Let me know if you want to be added as a contributor. If you make a PR I'll probably eventually get around to reviewing it. There's simple unit tests that test the commands, make sure the CI passes or else I won't merge the PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I use to do full e2e testing before I commit changes.

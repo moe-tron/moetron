@@ -3,7 +3,6 @@ from discord.ext import commands
 from generator import Generate
 from run_generator import Generator
 import os
-import csv
 
 # Discord bot that uses StyleGAN2 to create pics and send them.
 # See generator.py for the commands 

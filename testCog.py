@@ -29,7 +29,7 @@ class MockGenerator():
     def generate_one_image(self, seed, truncation = 0.55):
         return self.imagePath
     
-    def style_mix(self, seed1, seed2, truncation = 0.55):
+    def style_mix(self, seed1, seed2, truncation_psi = 0.55):
         return self.imagePath
 
 def async_test(f):
