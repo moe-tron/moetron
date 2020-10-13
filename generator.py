@@ -134,6 +134,8 @@ class Generate(commands.Cog):
         if " -t " in args:
             args, temp_trunc = args.split(" -t ")
             trunc = float(temp_trunc)
+            if trunc < -1 or trunc > 1:
+                raise ValueError
         split_args = args.split(" | ") if " | " in args else args.split()
         arg1, arg2 = split_args[0], split_args[1] # This will throw for 1 arg that's fine
         img_path = self.generator.style_mix(self.convertToSeed(arg1), self.convertToSeed(arg2), truncation_psi=trunc)
@@ -146,6 +148,8 @@ class Generate(commands.Cog):
             await ctx.send("Not enough inputs provided")
         elif isinstance(error.original, IndexError):
             await ctx.send("Not enough inputs provided")
+        elif isinstance(error.original, ValueError):
+            await ctx.send("Enter a number between 1 and -1 for trunc")
         else:
             print(error, error.original)
             await ctx.send("Uh oh something bad happened and idk what it was")

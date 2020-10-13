@@ -97,6 +97,21 @@ class TestGeneratorCog(unittest.TestCase):
         self.assertTrue(self.ctx.file.fp.name == self.imagePath)
     
     @async_test
+    async def testMixShouldReturnValidImgForTrunc(self):
+        await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf -t 1")
+        self.assertTrue(self.ctx.file.fp.name == self.imagePath)
+
+    @async_test
+    async def testMixShouldRaiseForNonNumericTrunc(self):
+        with self.assertRaises(ValueError):
+            await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf -t 11")
+
+    @async_test
+    async def testMixShouldRaiseForNonInvalidTrunc(self):
+        with self.assertRaises(ValueError):
+            await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf -t cock")
+    
+    @async_test
     async def testWhenDeleteIsEnabledImageShouldBeRemoved(self):
         shutil.copyfile("docs/gen_example.png", "results/image_to_be_deleted.png")
         self.imagePath = "results/image_to_be_deleted.png"
