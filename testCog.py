@@ -109,7 +109,7 @@ class TestGeneratorCog(unittest.TestCase):
     @async_test
     async def testMixShouldRaiseForNonInvalidTrunc(self):
         with self.assertRaises(ValueError):
-            await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf -t cock")
+            await self.genCog.mix(self.genCog, self.ctx, args="string1 | string2 asdf -t clock")
     
     @async_test
     async def testWhenDeleteIsEnabledImageShouldBeRemoved(self):

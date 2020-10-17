@@ -121,4 +121,4 @@ A) Moetron is public, but I currently only use it on a few servers that I have w
 * Not sure what else to add atm, I'm pretty happy with the state of this bot.
 
 **Contribution**
-Let me know if you want to be added as a contributor. If you make a PR I'll probably eventually get around to reviewing it. There's simple unit tests that test the commands, make sure the CI passes or else I won't merge the PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I use to do full e2e testing before I commit changes.
+Let me know if you want to be added as a contributor. If you make a PR I'll probably eventually get around to reviewing it. There's simple unit tests that test the commands, make sure the CI passes or else I won't merge the PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I (usually) use to do full e2e testing before I commit changes.
