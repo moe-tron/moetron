@@ -41,11 +41,17 @@ Generates an image based on the hash of a string.
 
 **mix** 
 Mixes the style of either 2 seeds or 2 strings. For multi word args split them using " | "
+
 Examples:
+
 moemix Moetron is awesome! | We love moetron!
+
 moemix 123 500
+
 moemix me you
+
 moemix Moetron is awesome! | We love moetron! -t 0.9
+
 ![Mix example](docs/mix_example.png)
 
 ## Setup:
