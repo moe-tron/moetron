@@ -77,6 +77,13 @@ Currently the bot's key is set to be read from an env var. You can just hardcode
 
 After everything is setup run the bot using `python bot.py` It'll take a few seconds to start up because it starts up tensorflow and generates a couple images before the bot starts.
 
+For linting, I use the following settings:
+
+"python.linting.pylintArgs": [
+    "--extension-pkg-whitelist=numpy",
+    "--errors-only"
+]
+
 The model I used can be obtained from:
 https://www.gwern.net/Faces#stylegan-2
 you can use whatever model you want, but this bot was built around using this one. Hence the "moe" naming and such.
