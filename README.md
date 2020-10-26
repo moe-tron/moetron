@@ -61,15 +61,13 @@ https://github.com/NVlabs/stylegan2
 
 It's kind of a pain to set up everything... Honestly I'd just try to get StyleGAN2 running first on your machine, then you'll know that this will work. After you get it working, you should just need discord py and to set up your bot w/ discord to get your key.
 
-Off the top of my head the requirements are:
+Off the top of my head the requirements for windows are:
 * Python 3.7 (3.8 or newer won't work)
-* Tensorflow-gpu 1.14
 * CUDA 10.0
 * cuDNN 7.5 or newer
 * Visual Studio 2017 w/ MSVC
-* Discord py
-* Pillow
-* numpy
+
+You can install python reqs using `pip install -r requirements.txt`
 
 You can test CUDA by running test_nvcc.cu
 
@@ -94,6 +92,9 @@ This bot is not used for commercial purposes, and derivatives of this work shoul
 
 See the license under docs, it's the same as the stylegan2 license.
 https://nvlabs.github.io/stylegan2/license.html
+
+**Alternatively**
+You can use the provided dockerfile if you have either a linux host or dev channel windows build w/ wsl2 set up. Idk if it works I haven't tested it because windows refuses to let me use the dev insider build for some reason.
 
 ## Options: 
 
@@ -128,4 +129,4 @@ A) Moetron is public, but I currently only use it on a few servers that I have w
 * Not sure what else to add atm, I'm pretty happy with the state of this bot.
 
 **Contribution**
-Let me know if you want to be added as a contributor. If you make a PR I'll probably eventually get around to reviewing it. There's simple unit tests that test the commands, make sure the CI passes or else I won't merge the PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I (usually) use to do full e2e testing before I commit changes.
+Let me know if you want to be added as a contributor. If you make a PR I'll probably eventually get around to reviewing it. There's simple unit tests that test the commands, make sure the CI passes or else I won't merge the PR. If you add any new commands to the cog add unit tests for the new commands as well. I'd also recommend testing out the bot yourself before making the PR, I have separate dev moetron I (usually) use to do testing before I commit changes.
