@@ -1,6 +1,6 @@
 ## Discord Bot using StyleGAN2 to generate anime face images.
 
-This is just a simple discord bot that interfaces with the StyleGAN2 generator to create images.
+This is a discord bot that interfaces with the StyleGAN2 generator to create images.
 
 ## Commands:
 
